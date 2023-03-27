@@ -1,23 +1,23 @@
 // This object will hold all of the data for the notes
 let notes = {
     "week1":{
-        "Topic 1": {
+        "Crazy": {
             "notes" :"This is topic 1 notes",
             "code" : "this should be a block of code",
             "Lecture": "This is where  lecture notes would go" }
         ,
-        "Topic 2": {
+        "Fun": {
             "notes" :"This is topic 2 notes",
             "code" : "this should be a block of code",
             "Lecture": "This is where  lecture notes would go" }
     },
     "week2" : {
-        "Topic 3": {
+        "Coding": {
             "notes" :"Notes for topic 3",
             "code" : "this should be a block of code for topic ONE",
             "Lecture": "This is where  lecture notes would go for Topic ONE" }
         ,
-        "Topic 4": {
+        "Time": {
             "notes" :"block of notes for topic 4",
             "code" : "this should be a block of code for topic two",
             "Lecture": "This is where  lecture notes would go for topic 2" }
@@ -51,6 +51,15 @@ weekDiv.addEventListener("click", (w) => {
     }
 })
 
+//when a topic is selected the header should change to be the same as that topic.
+let topicDiv = document.querySelector("#topicNav")
+let header = document.querySelector('#title')
+topicDiv.addEventListener("click", t => {
+    let topic = t.target.innerText
+    header.innerHTML = `<h1> ${topic} </h1>`
+    
+
+})
 
 
 
