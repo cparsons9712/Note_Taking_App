@@ -2,23 +2,23 @@
 let notes = {
     "week1":{
         "Topic 1": {
-            "notes" :"This+is+a+json+string",
+            "notes" :"This is topic 1 notes",
             "code" : "this should be a block of code",
             "Lecture": "This is where  lecture notes would go" }
         ,
         "Topic 2": {
-            "notes" :"This+is+a+json+string",
+            "notes" :"This is topic 2 notes",
             "code" : "this should be a block of code",
             "Lecture": "This is where  lecture notes would go" }
     },
     "week2" : {
         "Topic 3": {
-            "notes" :"Notes for topic ONE",
+            "notes" :"Notes for topic 3",
             "code" : "this should be a block of code for topic ONE",
             "Lecture": "This is where  lecture notes would go for Topic ONE" }
         ,
         "Topic 4": {
-            "notes" :"block of notes for topic two",
+            "notes" :"block of notes for topic 4",
             "code" : "this should be a block of code for topic two",
             "Lecture": "This is where  lecture notes would go for topic 2" }
     }
