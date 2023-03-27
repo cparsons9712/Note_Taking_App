@@ -26,11 +26,15 @@ let notes = {
 
 /* the last item in the weeks array should be preselected. the first item in the selected week should be preselected
 */
+
+
 // functionality to add a topic into the content array
 
-//first select the button that will trigger the event
+
 let week1button = document.querySelector("#week1")
 // when week1 button is pushed the topic navigation bar should auto populate with the topics under the week1 section of notes object
+
+
 week1button.addEventListener("focus" ,() =>{
     //remove any buttons currently in the nav bar
     let prevButton = document.querySelectorAll("#topicNav > button")
@@ -46,7 +50,6 @@ week1button.addEventListener("focus" ,() =>{
         topic.innerHTML = key;
         let nav = document.querySelector('#topicNav')
         nav.append(topic)
-        //Need to stop the button from placing the topics in the nav over and over again
 
     }
 
