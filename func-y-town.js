@@ -31,29 +31,30 @@ let notes = {
 // functionality to add a topic into the content array
 
 
-let week1button = document.querySelector("#week1")
-// when week1 button is pushed the topic navigation bar should auto populate with the topics under the week1 section of notes object
 
+// // when a week button is pushed the topic navigation bar should auto populate with the topics under the week1 section of notes object
 
-week1button.addEventListener("focus" ,() =>{
-    //remove any buttons currently in the nav bar
+let weekDiv = document.querySelector("#weekNav")
+weekDiv.addEventListener("click", (w) => {
+    let week = w.target.id
+    let topics = Object.keys(notes[week])
+
     let prevButton = document.querySelectorAll("#topicNav > button")
-    for(button of prevButton){
-        button.remove()
-    }
-
-    // select all of the topic keys under week1
-    let topics = Object.keys(notes.week1)
-    // loop through those topic keys and create buttons that are then placed in the navigation panel for topics
+     for(button of prevButton){
+         button.remove()
+     }
     for(key of topics){
-        let topic = document.createElement('button')
+      let topic = document.createElement('button')
         topic.innerHTML = key;
         let nav = document.querySelector('#topicNav')
         nav.append(topic)
-
     }
-
 })
+
+
+
+
+
 
 //function to create an edit page or prefill existing page to be edited
 // add new button into the topic nav : In object it should find the current week and create a new key value pair
