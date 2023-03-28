@@ -54,13 +54,17 @@ weekDiv.addEventListener("click", (w) => {
 let topicDiv = document.querySelector("#topicNav")
 let header = document.querySelector('#title')
 topicDiv.addEventListener("click", t => {
+let mainCont = document.querySelector(".contentSelection");
     let topic = t.target.innerText
     header.innerHTML = `<h1> ${topic} </h1>`
+    let mainDis = document.querySelector('#mainContent')
+    mainDis.innerHTML = ""
+
     // connect the content type navigation to the content under topic so that the button is connecting to the correct data to populate main body div
-    let mainCont = document.querySelector(".contentSelection");
+
     mainCont.addEventListener("click", (c) => {
         //this needs to grab the value from the notes key in week.topic.notes and set the innerhtml of mainContent to equal the value.
-        let mainDis = document.querySelector('#mainContent')
+
         let key = c.target.id
         let weekTopic = notes[week]
         let topicContent = weekTopic[topic]
@@ -74,7 +78,12 @@ topicDiv.addEventListener("click", t => {
 
 
 
+/*
+TO DO:
 
+edit froms
+new forms
+*/
 
 
 
