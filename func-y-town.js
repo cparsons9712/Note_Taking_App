@@ -72,10 +72,6 @@ topicDiv.addEventListener("click", t => {
 
 })
 
-/****************************TODO ****************
-make the fields for title and content clear on any button click
-add funtionality to add new topics (headers, contents for notes, code, lecture)
-add functionality to take current saved content and place it into a input pield for edits and updates
 
 
 
