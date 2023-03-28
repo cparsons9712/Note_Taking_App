@@ -27,74 +27,76 @@ let notes = {
     },
   },
 };
-
-/* the last item in the weeks array should be preselected. the first item in the selected week should be preselected
- */
-
-// functionality to add a topic into the content array
-
+/***************************************** Populate topic navigation**************************************/
 // // when a week button is pushed the topic navigation bar should auto populate with the topics under the week1 section of notes object
 
-let weekDiv = document.querySelector("#weekNav");
-weekDiv.addEventListener("click", (w) => {
-  let week = w.target.id;
-  let topics = Object.keys(notes[week]);
-
-  let prevButton = document.querySelectorAll("#topicNav > button");
-  for (button of prevButton) {
-    button.remove();
+let weekDiv = document.querySelector("#weekNav"); // select the navigation panel for weeks
+weekDiv.addEventListener("click", (w) => { // create a click event listener for week buttons
+  let week = w.target.id; // select the button that was clicked
+  let topics = Object.keys(notes[week]); // create an array of all the topic objects under the selected week
+  let prevButton = document.querySelectorAll("#topicNav > button"); // selects all the currently shown topic buttons
+  for (button of prevButton) { // loop through all the currently shown topic buttons
+    button.remove(); //remove any preexisting buttons
   }
-  for (key of topics) {
-    let topic = document.createElement("button");
-    topic.innerHTML = key;
-    let nav = document.querySelector("#topicNav");
-    nav.append(topic);
+  for (key of topics) { // loop through the array of topics in the selected week object
+    let topic = document.createElement("button"); // create a button
+    topic.innerHTML = key; // set the text of that button to the current topic
+    let nav = document.querySelector("#topicNav"); // select the topic navigation panel
+    nav.append(topic); // add the topic button into the navigation panel
   }
-
+  /********************************** Populate the Header  ****************************************************/
   //when a topic is selected the header should change to be the same as that topic.
-  let topicDiv = document.querySelector("#topicNav");
-  let header = document.querySelector("#title");
-  topicDiv.addEventListener("click", (t) => {
+  let topicDiv = document.querySelector("#topicNav"); // select the navigation panel
+  let header = document.querySelector("#title"); // select the div that holds the title text
+  topicDiv.addEventListener("click", (t) => { // add a click listener for all of the topic buttons
+    let mainCont = document.querySelector(".contentSelection"); // select the div that holds the buttons for notes, code, and lecture
+    let topic = t.target.innerText; // specify the topic button that was clicked and grab the text for it
+    header.innerHTML = `<h1> ${topic} </h1>`; // set the header to be the same as the topic button
+    let mainDis = document.querySelector("#mainContent"); // select the div that displays the text content for the specified topic
+    mainDis.innerHTML = ""; // clear the text content div of any currently existing text
 
-    let mainCont = document.querySelector(".contentSelection");
-    let topic = t.target.innerText;
-    header.innerHTML = `<h1> ${topic} </h1>`;
-    let mainDis = document.querySelector("#mainContent");
-    mainDis.innerHTML = "";
 
+ /******************************* Populate the content field  ******************************/
     // connect the content type navigation to the content under topic so that the button is connecting to the correct data to populate main body div
 
-    mainCont.addEventListener("click", (c) => {
-      //this needs to grab the value from the notes key in week.topic.notes and set the innerhtml of mainContent to equal the value.
+    mainCont.addEventListener("click", (c) => { // when a notes, code, or lecture button is clicked
 
-      //
+      let key = c.target.id; // specify the exact button that was clicked
+      let weekTopic = notes[week]; // get the object of topics from that week
+      let topicContent = weekTopic[topic]; // specify the topic that you need the content for
+      mainDis.innerHTML = topicContent[key]; // grab the content type that corresponds with the button click and display it in the main content text div
 
-      let key = c.target.id;
-      let weekTopic = notes[week];
-      let topicContent = weekTopic[topic];
-      mainDis.innerHTML = topicContent[key];
+/*********************************** Edit functionality ***********************************/
 
-      let editButton = document.querySelector('#edit')
-      editButton.addEventListener("click", ()=>{
-        // take current head and add into local storage
-        localStorage.setItem("header", header.innerHTML)
-        let changeTitle = document.createElement("input")
-        changeTitle.type = "text";
-        changeTitle.size = "70"
-        header.innerHTML = ""
-        header.appendChild(changeTitle);
-        //prefill changeTitle with local storage TITLE
-        if(localStorage.getItem("header")) {
-          changeTitle.value = localStorage.getItem("header")
+      //when the edit button is clicked we need to save all the current data into local storage, replace title and contents with input fields prefilled with past data
+
+      let editButton = document.querySelector('#edit') // grab the edit button
+      editButton.addEventListener("click", ()=>{ // when the edit button is clicked
+        localStorage.setItem("header", header.innerHTML) // take the currently displayed header and save it into local storage
+
+        let changeTitle = document.createElement("input") // create an input field for the title
+        changeTitle.type = "text"; // specify that it will be a text input
+        changeTitle.size = "70" // make the width of the text input larger
+        header.innerHTML = "" // empty the title of any currently existing text
+        header.appendChild(changeTitle); // place the input field where the text used to exist
+
+        if(localStorage.getItem("header")) { // check local storage for a saved title
+          changeTitle.value = localStorage.getItem("header") // place that saved title into the input field to be manipulated
         }
 
-        //hide edit button and show save button
-        editButton.style.display = "none"
-        let saveButton = document.querySelector("#save")
-        saveButton.style.display = "block"
-        //when save button is clicked the location in the object should be rewitten
-        saveButton.addEventListener("click", () => {
-          header.innerHTML = `<h1> ${changeTitle.value} </h1>`;
+        editButton.style.display = "none" // hide the edit button
+        let saveButton = document.querySelector("#save") // grab the save button
+        saveButton.style.display = "block" // show the save button where the edit button once was
+
+        
+/********************** Save Changes Functionality  **************************************************/
+        //when save button is clicked the location in the object should be rewitten with the contents of the input fields, and the save button should hide and be replaced with edit button
+        saveButton.addEventListener("click", () => { // when the save button is clicked
+          header.innerHTML = `<h1> ${changeTitle.value} </h1>`; // change the header from the input to a text field containing what was in the input field
+
+          //how can I keep the h1 without showing it in input field. Maybe use a span inside the h1 tags?
+          // how can I change the key's text while keeping the values the same? delete and rewrite?
+
         })
 
       })
@@ -103,20 +105,13 @@ weekDiv.addEventListener("click", (w) => {
 
     });
 
-    //select edit button and click event listener
-    // title and body goes to local storage
+   //  body goes to local storage
     //current div is replaced with input fields
     // if local storage has information
     // input fields are populated from local storage
-    // need to turn edit button into a save button
-    // create a new div for edit and save buttons
-    // save button is hidden normally, but when edit is clicked edit hides and save is shown
 
-    //on save rewrite the appropriate location in the notes object with the text content of the input field. * look into ways to keep formatting in multi-line text field.
 
-    //set var in the function
-    // use put request
-    // learn how to make express interact with database.
+    //on save rewrite the appropriate location in the notes object with the text content of the input field. * look into ways to keep html formatting in multi-line text field.
 
 
   });
@@ -131,5 +126,4 @@ new forms
 
 //function to create an edit page or prefill existing page to be edited
 // add new button into the topic nav : In object it should find the current week and create a new key value pair
-// place an input text box where h2 currently sits. The contents of this box will populate the topic key in the object
 // create a input text field where the content box currently reside.
