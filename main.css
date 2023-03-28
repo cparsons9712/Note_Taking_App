@@ -78,7 +78,7 @@ body{
 
 .backgrounds > #title {
     height: 40px;
-    min-width: 400px;
+    width: 550px;
     opacity: .7;
     position: absolute;
     top: 80px;
@@ -88,8 +88,8 @@ body{
     border: 3px solid rgb(81, 85, 4);
 }
 .backgrounds > #body{
-    height: 350px;
-    width: 400px;
+    height: 650px;
+    width: 550px;
     opacity: .7;
     position: absolute;
     top: 150px;
@@ -114,9 +114,11 @@ body{
 }
 .contentSelection > button {
     background-image: url(images/darkGreyBG.png);
-    font: bold 15px "Bradley Hand ITC", serif;
+    font: bold 20px "Bradley Hand ITC", serif;
     border: 3px solid black;
     opacity: .9;
+    width: 90px;
+    height: 50px;
 }
 .contentSelection > button:hover {
     background-image: url(images/yellow_wc_bg.png);
@@ -132,4 +134,28 @@ body{
     width: 380px;
     position: absolute;
     top: 85px;
+}
+
+.editSection{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+
+}
+#edit{
+    background-image: url(images/darkGreyBG.png);
+    font: bold 20px "Bradley Hand ITC", serif;
+    border: 3px solid black;
+    opacity: .9;
+    width: 90px;
+    height: 50px;
+}
+#save{
+    display: none;
+    background-image: url(images/darkGreyBG.png);
+    font: bold 20px "Bradley Hand ITC", serif;
+    border: 3px solid black;
+    opacity: .9;
+    width: 90px;
+    height: 50px;
 }

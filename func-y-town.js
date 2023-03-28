@@ -55,6 +55,7 @@ weekDiv.addEventListener("click", (w) => {
   let topicDiv = document.querySelector("#topicNav");
   let header = document.querySelector("#title");
   topicDiv.addEventListener("click", (t) => {
+
     let mainCont = document.querySelector(".contentSelection");
     let topic = t.target.innerText;
     header.innerHTML = `<h1> ${topic} </h1>`;
@@ -66,11 +67,58 @@ weekDiv.addEventListener("click", (w) => {
     mainCont.addEventListener("click", (c) => {
       //this needs to grab the value from the notes key in week.topic.notes and set the innerhtml of mainContent to equal the value.
 
+      //
+
       let key = c.target.id;
       let weekTopic = notes[week];
       let topicContent = weekTopic[topic];
       mainDis.innerHTML = topicContent[key];
+
+      let editButton = document.querySelector('#edit')
+      editButton.addEventListener("click", ()=>{
+        // take current head and add into local storage
+        localStorage.setItem("header", header.innerHTML)
+        let changeTitle = document.createElement("input")
+        changeTitle.type = "text";
+        changeTitle.size = "70"
+        header.innerHTML = ""
+        header.appendChild(changeTitle);
+        //prefill changeTitle with local storage TITLE
+        if(localStorage.getItem("header")) {
+          changeTitle.value = localStorage.getItem("header")
+        }
+
+        //hide edit button and show save button
+        editButton.style.display = "none"
+        let saveButton = document.querySelector("#save")
+        saveButton.style.display = "block"
+        //when save button is clicked the location in the object should be rewitten
+        saveButton.addEventListener("click", () => {
+          header.innerHTML = `<h1> ${changeTitle.value} </h1>`;
+        })
+
+      })
+
+
+
     });
+
+    //select edit button and click event listener
+    // title and body goes to local storage
+    //current div is replaced with input fields
+    // if local storage has information
+    // input fields are populated from local storage
+    // need to turn edit button into a save button
+    // create a new div for edit and save buttons
+    // save button is hidden normally, but when edit is clicked edit hides and save is shown
+
+    //on save rewrite the appropriate location in the notes object with the text content of the input field. * look into ways to keep formatting in multi-line text field.
+
+    //set var in the function
+    // use put request
+    // learn how to make express interact with database.
+
+
   });
 })
 
@@ -85,11 +133,3 @@ new forms
 // add new button into the topic nav : In object it should find the current week and create a new key value pair
 // place an input text box where h2 currently sits. The contents of this box will populate the topic key in the object
 // create a input text field where the content box currently reside.
-
-// on window load the navigation bars should be created from the above arrays,
-// first select the weeknav div
-//then loop through proper array
-// for each item in the array of keys from week1 array:
-// create a button
-// assign the text to the content value
-//append it to the weeknav array
